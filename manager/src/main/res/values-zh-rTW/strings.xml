@@ -86,6 +86,8 @@
     <string name="home_root_description_sui">如果您正在使用 Magisk，可以嘗試 %1$s。對於 Root 使用者，它將最終取代 Shizuku。注意，已有的應用程式需要一點點修改來使用 %2$s。</string>
     <string name="settings_start_on_boot_summary">對於已 Root 裝置，Shizuku 可以在開機時自動啟動</string>
     <string name="settings_start_on_boot">在開機時啟動 (Root)</string>
+    <string name="settings_custom_su">自訂 su 指令</string>
+    <string name="settings_custom_su_summary">用於請求 Root 權限開機自啟的指令，自動識別請留空</string>
     <string name="grant_dialog_button_allow_always">一律允許</string>
     <string name="grant_dialog_button_deny">拒絕</string>
     <string name="permission_warning_template">要允許「%1$s」%2$s 嗎？</string>

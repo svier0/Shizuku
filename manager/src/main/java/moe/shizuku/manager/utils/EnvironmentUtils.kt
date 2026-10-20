@@ -4,6 +4,7 @@ import android.app.UiModeManager
 import android.content.Context
 import android.content.res.Configuration
 import android.os.SystemProperties
+import moe.shizuku.manager.ShizukuSettings
 import java.io.File
 
 object EnvironmentUtils {
@@ -15,7 +16,13 @@ object EnvironmentUtils {
     }
 
     fun isRooted(): Boolean {
+        // If user configured a custom su command, treat as rooted.
+        if (getCustomRootPath().isNotEmpty()) return true
         return System.getenv("PATH")?.split(File.pathSeparatorChar)?.find { File("$it/su").exists() } != null
+    }
+
+    fun getCustomRootPath(): String {
+        return runCatching { ShizukuSettings.getCustomSu() ?: "" }.getOrDefault("")
     }
 
     fun getAdbTcpPort(): Int {

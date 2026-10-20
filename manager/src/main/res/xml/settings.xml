@@ -10,6 +10,11 @@
             android:summary="@string/settings_start_on_boot_summary"
             android:title="@string/settings_start_on_boot" />
 
+        <androidx.preference.EditTextPreference
+            android:key="custom_su"
+            android:summary="@string/settings_custom_su_summary"
+            android:title="@string/settings_custom_su" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_language">

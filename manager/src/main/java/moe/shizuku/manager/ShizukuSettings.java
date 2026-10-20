@@ -25,6 +25,7 @@ public class ShizukuSettings {
     public static final String NIGHT_MODE = "night_mode";
     public static final String LANGUAGE = "language";
     public static final String KEEP_START_ON_BOOT = "start_on_boot";
+    public static final String CUSTOM_SU = "custom_su";
 
     private static SharedPreferences sPreferences;
 
@@ -82,6 +83,14 @@ public class ShizukuSettings {
 
     public static void setLastLaunchMode(@LaunchMethod int method) {
         getPreferences().edit().putInt("mode", method).apply();
+    }
+
+    public static String getCustomSu() {
+        return getPreferences().getString(CUSTOM_SU, "");
+    }
+
+    public static void setCustomSu(String value) {
+        getPreferences().edit().putString(CUSTOM_SU, value).apply();
     }
 
     @AppCompatDelegate.NightMode

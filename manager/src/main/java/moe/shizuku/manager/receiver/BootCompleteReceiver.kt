@@ -20,6 +20,7 @@ import moe.shizuku.manager.adb.AdbClient
 import moe.shizuku.manager.adb.AdbKey
 import moe.shizuku.manager.adb.AdbMdns
 import moe.shizuku.manager.adb.PreferenceAdbKeyStore
+import moe.shizuku.manager.starter.RootHelper
 import moe.shizuku.manager.starter.Starter
 import moe.shizuku.manager.utils.UserHandleCompat
 import rikka.shizuku.Shizuku
@@ -48,13 +49,13 @@ class BootCompleteReceiver : BroadcastReceiver() {
     }
 
     private fun rootStart(context: Context) {
-        if (!Shell.getShell().isRoot) {
+        if (!RootHelper.isRoot()) {
             //NotificationHelper.notify(context, AppConstants.NOTIFICATION_ID_STATUS, AppConstants.NOTIFICATION_CHANNEL_STATUS, R.string.notification_service_start_no_root)
             Shell.getCachedShell()?.close()
             return
         }
 
-        Shell.cmd(Starter.internalCommand).exec()
+        RootHelper.execInternalCommand()
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)

@@ -137,29 +137,27 @@ private class ViewModel(context: Context, root: Boolean, host: String?, port: In
         postResult()
 
         GlobalScope.launch(Dispatchers.IO) {
-            if (!Shell.getShell().isRoot) {
+            if (!RootHelper.isRoot()) {
                 Shell.getCachedShell()?.close()
                 sb.append('\n').append("Can't open root shell, try again...").append('\n')
 
                 postResult()
-                if (!Shell.getShell().isRoot) {
+                if (!RootHelper.isRoot()) {
                     sb.append('\n').append("Still not :(").append('\n')
                     postResult(NotRootedException())
                     return@launch
                 }
             }
 
-            Shell.cmd(Starter.internalCommand).to(object : CallbackList<String?>() {
-                override fun onAddElement(s: String?) {
-                    sb.append(s).append('\n')
-                    postResult()
+            RootHelper.executeAsRoot(
+                onLine = { sb.append(it).append('\n'); postResult() },
+                onError = { code ->
+                    if (code != 0) {
+                        sb.append('\n').append("Send this to developer may help solve the problem.")
+                        postResult()
+                    }
                 }
-            }).submit {
-                if (it.code != 0) {
-                    sb.append('\n').append("Send this to developer may help solve the problem.")
-                    postResult()
-                }
-            }
+            )
         }
     }
 

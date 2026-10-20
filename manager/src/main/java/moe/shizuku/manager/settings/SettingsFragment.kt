@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.preference.EditTextPreference
 import androidx.preference.*
 import androidx.recyclerview.widget.RecyclerView
 import moe.shizuku.manager.R
@@ -39,6 +40,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private lateinit var nightModePreference: IntegerSimpleMenuPreference
     private lateinit var blackNightThemePreference: TwoStatePreference
     private lateinit var startOnBootPreference: TwoStatePreference
+    private lateinit var customSuPreference: EditTextPreference
     private lateinit var startupPreference: PreferenceCategory
     private lateinit var translationPreference: Preference
     private lateinit var translationContributorsPreference: Preference
@@ -56,6 +58,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         nightModePreference = findPreference(KEY_NIGHT_MODE)!!
         blackNightThemePreference = findPreference(KEY_BLACK_NIGHT_THEME)!!
         startOnBootPreference = findPreference(KEEP_START_ON_BOOT)!!
+        customSuPreference = findPreference<EditTextPreference>(ShizukuSettings.CUSTOM_SU)!!
         startupPreference = findPreference("startup")!!
         translationPreference = findPreference("translation")!!
         translationContributorsPreference = findPreference("translation_contributors")!!
